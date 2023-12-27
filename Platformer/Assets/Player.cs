@@ -22,8 +22,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         float richtung = Input.GetAxis("Horizontal");
-        transform.Translate(Vector2.right * speed * richtung * Time.deltaTime);
-
+       
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector2.up * jumph, ForceMode2D.Impulse);
@@ -40,10 +39,13 @@ public class Player : MonoBehaviour
         if(richtung < 0)
         {
             transform.rotation = Quaternion.Euler(0,180,0);
+            transform.Translate(Vector2.right * speed * -richtung * Time.deltaTime);
         }
         if(richtung > 0)
         {
             transform.rotation = Quaternion.Euler(0,0,0);
+            transform.Translate(Vector2.right * speed * richtung * Time.deltaTime);
+
         }
         
     }
