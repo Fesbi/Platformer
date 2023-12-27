@@ -40,12 +40,10 @@ public class Player : MonoBehaviour
         if(richtung < 0)
         {
             transform.rotation = Quaternion.Euler(0,180,0);
-            transform.Translate(Vector2.right * -speed * richtung * Time.deltaTime);
         }
-         if(richtung > 0)
+        if(richtung > 0)
         {
             transform.rotation = Quaternion.Euler(0,0,0);
-            transform.Translate(Vector2.right * speed * richtung * Time.deltaTime);
         }
         
     }
