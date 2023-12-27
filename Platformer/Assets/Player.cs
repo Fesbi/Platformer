@@ -6,14 +6,16 @@ public class Player : MonoBehaviour
 {
     private float speed = 5;
     private Rigidbody2D rb;
-    public float jumph =5;
+    private float jumph =5;
     private bool isGrounded = false;
     private Animator anim;
+    private Vector3 rotation;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        rotation = transform.eulerAngles;
     }
 
     // Update is called once per frame
@@ -35,6 +37,17 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("isRunning",false);
         }
+        if(richtung < 0)
+        {
+            transform.rotation = Quaternion.Euler(0,180,0);
+            transform.Translate(Vector2.right * -speed * richtung * Time.deltaTime);
+        }
+         if(richtung > 0)
+        {
+            transform.rotation = Quaternion.Euler(0,0,0);
+            transform.Translate(Vector2.right * speed * richtung * Time.deltaTime);
+        }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
