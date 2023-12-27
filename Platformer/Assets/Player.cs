@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     private float speed = 5;
     private Rigidbody2D rb;
-    private float jumph =5;
+    private float jumph = 5;
     private bool isGrounded = false;
     private Animator anim;
     private Vector3 rotation;
