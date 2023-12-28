@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public bool isPlayer;
     private Vector3 rotation;
     private Vector3 currentPosition;
-
+    private Animator anim;
     private GameObject player;
     private Transform playerTransform;
     private Player playerScript;
@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("Player");
         playerTransform = GameObject.Find("Player").transform;
         playerScript = playerTransform.GetComponent<Player>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -44,6 +45,15 @@ public class Enemy : MonoBehaviour
         }
 
         currentPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        if (richtung != 0)
+        {
+            anim.SetBool("IsRunning", true);
+        }
+        else
+        {
+            anim.SetBool("IsRunning", false);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
