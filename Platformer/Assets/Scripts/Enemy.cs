@@ -5,7 +5,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed = 5f;
+    public float jumph = 5;
     public bool isPlayer;
+    public bool isGrounded = false;
+    private Rigidbody2D rb;
     private Vector3 rotation;
     private Vector3 currentPosition;
     private Animator anim;
@@ -19,6 +22,7 @@ public class Enemy : MonoBehaviour
         playerTransform = GameObject.Find("Player").transform;
         playerScript = playerTransform.GetComponent<Player>();
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -52,6 +56,12 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetBool("IsRunning", false);
             }
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.AddForce(Vector2.up * jumph, ForceMode2D.Impulse);
+            isGrounded = false;
+        }
         }
 
         currentPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
