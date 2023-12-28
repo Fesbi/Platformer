@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
         {
             player.SetActive(false);
             playerTransform.position = currentPosition;
+
             float richtung = Input.GetAxis("Horizontal");
             if (richtung < 0)
             {
@@ -42,18 +43,18 @@ public class Enemy : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 transform.Translate(Vector2.right * speed * richtung * Time.deltaTime);
             }
+
+            if (richtung != 0)
+            {
+                anim.SetBool("IsRunning", true);
+            }
+            else
+            {
+                anim.SetBool("IsRunning", false);
+            }
         }
 
         currentPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-        if (richtung != 0)
-        {
-            anim.SetBool("IsRunning", true);
-        }
-        else
-        {
-            anim.SetBool("IsRunning", false);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
